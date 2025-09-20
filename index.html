@@ -39,6 +39,36 @@
             <div id="cart-items" class="cart-items-container">
                 <p class="cart-empty-message">Tu carrito está vacío.</p>
             </div>
+            
+            <div class="customer-details">
+                <h4>Completa tu Pedido</h4>
+                <div class="form-group">
+                    <label for="customer-name">Nombre Completo:</label>
+                    <input type="text" id="customer-name" placeholder="Ej: Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Teléfono (10 dígitos):</label>
+                    <input type="tel" id="customer-phone" placeholder="Ej: 4771234567" maxlength="10">
+                </div>
+
+                <div class="form-group">
+                    <label>Método de Entrega:</label>
+                    <div class="delivery-options">
+                        <input type="radio" name="delivery-option" id="pickup" value="Recoger en Tienda">
+                        <label for="pickup"><i class="fa-solid fa-shop"></i> Recoger en Tienda</label>
+                        
+                        <input type="radio" name="delivery-option" id="delivery" value="Envío a Domicilio">
+                        <label for="delivery"><i class="fa-solid fa-motorcycle"></i> Envío a Domicilio</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-comments">Comentarios Adicionales:</label>
+                    <textarea id="customer-comments" rows="3" placeholder="Para envíos, indica aquí tu dirección completa."></textarea>
+                </div>
+                <div id="form-errors" class="form-errors"></div>
+            </div>
+            
             <div class="cart-footer">
                 <div class="cart-total">
                     <span>Subtotal:</span>
@@ -62,12 +92,12 @@
         <div class="container footer-content">
             <div class="business-info">
                 <h3><i class="fa-solid fa-shop"></i> Nuestra Sucursal</h3>
-                <p><i class="fa-solid fa-location-dot"></i> Blvd. Timoteo Lozano 4108-3, León, Gto.</p>
+                <p><i class="fa-solid fa-location-dot"></i> Blvd Timoteo Lozano 4108-3</p>
                 <p><strong>¡Cerramos los Jueves!</strong></p>
             </div>
             <div class="business-hours">
                 <h3><i class="fa-solid fa-clock"></i> Horario de Atención</h3>
-                <p><strong>Lunes a Viernes:</strong> 9:00 AM - 6:00 PM (horario corrido)</p>
+                <p><strong>Lunes a Viernes:</strong> 9:00 AM - 6:00 PM</p>
                 <p><strong>Sábado y Domingo:</strong> 9:00 AM - 2:00 PM</p>
             </div>
         </div>
@@ -77,7 +107,6 @@
     </footer>
 
     <div id="toast-notification" class="toast"></div>
-
     <script src="script.js"></script>
 </body>
 </html>
