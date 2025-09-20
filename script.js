@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- CONFIGURACIÓN INICIAL ---
-    const WHATSAPP_NUMBER = '5214776772422'; // <-- ¡IMPORTANTE! Cambia este número por el de tu negocio.
+    const WHATSAPP_NUMBER = '5214776772422'; // <-- ¡IMPORTANTE! Cambia este número.
     
-    // --- BASE DE DATOS DE PRODUCTOS ---
     const products = [
         { id: 1, name: 'Jabón Líquido para Trastes (500ml)', price: 25.00, image: 'https://placehold.co/300x300/e8e8e8/333?text=Jabón+Líquido' },
         { id: 2, name: 'Detergente en Polvo (1kg)', price: 45.00, image: 'https://placehold.co/300x300/e8e8e8/333?text=Detergente' },
@@ -19,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 12, name: 'Mechudo de Microfibra Absorbente', price: 95.00, image: 'https://placehold.co/300x300/e8e8e8/333?text=Mechudo' }
     ];
 
-    // --- SELECTORES DEL DOM ---
     let cart = [];
     const productCatalog = document.getElementById('product-catalog');
     const cartItemsContainer = document.getElementById('cart-items');
@@ -32,14 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartSection = document.getElementById('cart-section');
     const cartHeader = document.querySelector('.cart-header');
     
-    // Selectores para el nuevo formulario
     const customerNameInput = document.getElementById('customer-name');
     const customerPhoneInput = document.getElementById('customer-phone');
     const customerCommentsInput = document.getElementById('customer-comments');
     const deliveryOptions = document.querySelectorAll('input[name="delivery-option"]');
     const formErrorsContainer = document.getElementById('form-errors');
+    
+    // SELECTOR PARA EL NUEVO BOTÓN
+    const closeCartBtn = document.getElementById('close-cart-btn');
 
-    // --- FUNCIONES DEL CATÁLOGO Y CARRITO (sin cambios mayores) ---
+
     function renderProducts() {
         productCatalog.innerHTML = '';
         products.forEach(product => {
@@ -115,12 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileCartCount.style.display = totalItems > 0 ? 'flex' : 'none';
     }
 
-    // --- NUEVAS FUNCIONES DE VALIDACIÓN Y ENVÍO ---
-
-    /**
-     * Valida el formulario de datos del cliente.
-     * @returns {object|false} - Un objeto con los datos del formulario si es válido, o `false` si hay errores.
-     */
     function validateForm() {
         const name = customerNameInput.value.trim();
         const phone = customerPhoneInput.value.trim();
@@ -159,19 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return { name, phone, delivery, comments };
     }
 
-    /**
-     * Genera y envía el pedido a WhatsApp (VERSIÓN ACTUALIZADA).
-     */
     function sendOrder() {
         if (cart.length === 0) {
             showToast("Tu carrito está vacío.");
             return;
         }
-
         const formData = validateForm();
         if (!formData) {
             showToast("Por favor, corrige los errores en el formulario.");
-            return; // Detiene el envío si la validación falla
+            return;
         }
 
         let message = `*¡Hola PP LIMPIO!* 👋\n\nQuisiera realizar el siguiente pedido:\n\n`;
@@ -207,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCart(productId);
         }
     });
-
     cartItemsContainer.addEventListener('click', (e) => {
         const target = e.target.closest('button');
         if (!target) return;
@@ -215,14 +203,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('quantity-btn')) { updateQuantity(productId, target.dataset.action); } 
         else if (target.classList.contains('remove-item-btn')) { removeFromCart(productId); }
     });
-
     sendOrderBtn.addEventListener('click', sendOrder);
     clearCartBtn.addEventListener('click', clearCart);
-    
     mobileCartToggle.addEventListener('click', () => cartSection.classList.toggle('active'));
     cartHeader.addEventListener('click', () => { if (window.innerWidth < 992) { cartSection.classList.remove('active'); } });
+    
+    // EVENT LISTENER PARA EL NUEVO BOTÓN
+    closeCartBtn.addEventListener('click', () => {
+        cartSection.classList.remove('active');
+    });
 
-    // Limpia los errores al empezar a interactuar con el formulario
     [customerNameInput, customerPhoneInput, customerCommentsInput].forEach(input => {
         input.addEventListener('input', () => { formErrorsContainer.innerHTML = ''; });
     });
