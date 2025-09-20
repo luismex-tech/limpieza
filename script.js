@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- CONFIGURACIÓN INICIAL ---
-    const WHATSAPP_NUMBER = '5211234567890'; // <-- ¡IMPORTANTE! Cambia este número por el de tu negocio.
+    const WHATSAPP_NUMBER = '5214776772422'; // <-- ¡IMPORTANTE! Cambia este número por el de tu negocio.
     
     // --- BASE DE DATOS DE PRODUCTOS ---
     const products = [
