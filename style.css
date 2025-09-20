@@ -4,7 +4,7 @@
     --secondary-color: #D8E2DC;
     --accent-color: #25D366;
     --text-color: #333;
-    --light-gray: #f4f4f4;
+    --light-gray: #f0f0f0;
     --white: #ffffff;
     --danger-color: #e74c3c;
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -36,14 +36,46 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--secondary-col
 .add-to-cart-btn i { margin-right: 8px; }
 .add-to-cart-btn:hover { background-color: #00443a; }
 
-/* --- Resumen del Pedido (Carrito) --- */
-.cart-summary { background-color: var(--white); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 20px; position: sticky; top: 100px; max-height: calc(100vh - 120px); display: flex; flex-direction: column; }
-.cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--light-gray); padding-bottom: 10px; }
+/* --- Resumen del Pedido (Carrito) - CORREGIDO --- */
+.cart-summary {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    position: sticky;
+    top: 100px;
+    /* Altura máxima para que no sea demasiado grande en pantallas altas */
+    max-height: calc(100vh - 120px); 
+    /* Estructura Flexbox para controlar el interior */
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    /* Evita que el encabezado se encoja */
+    flex-shrink: 0; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 15px;
+}
 .cart-header h2 i { margin-right: 10px; color: var(--primary-color); }
 #clear-cart-btn { background: none; border: none; color: #cc0000; font-size: 1.2rem; cursor: pointer; transition: color 0.3s; }
 #clear-cart-btn:hover { color: #ff0000; }
-.cart-items-container { overflow-y: auto; min-height: 80px; }
-.cart-empty-message { color: #888; text-align: center; padding: 20px 0; }
+
+/* NUEVO: Contenedor del cuerpo del carrito que será desplazable */
+.cart-body {
+    /* Ocupa todo el espacio vertical disponible */
+    flex-grow: 1; 
+    /* Habilita el desplazamiento solo si el contenido es más alto que el espacio */
+    overflow-y: auto;
+    /* Pequeño margen para que la barra de scroll no pegue con el borde */
+    margin: 15px 0;
+    padding-right: 10px;
+}
+
+.cart-empty-message { color: #888; text-align: center; padding: 40px 0; }
 .cart-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
 .cart-item-info { flex-grow: 1; }
 .cart-item-info span { display: block; font-size: 0.95rem; }
@@ -52,63 +84,65 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--secondary-col
 .quantity-btn { background-color: var(--light-gray); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
 .quantity-btn:hover { background-color: #ddd; }
 .remove-item-btn { background: none; border: none; color: #aaa; font-size: 1rem; cursor: pointer; margin-left: 10px; }
-.cart-footer { border-top: 2px solid var(--light-gray); padding-top: 15px; margin-top: auto; }
-.cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; margin-bottom: 20px; }
-.btn-whatsapp { background-color: var(--accent-color); color: var(--white); border: none; padding: 15px; border-radius: 8px; width: 100%; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s; }
-.btn-whatsapp:hover { background-color: #1EBE57; }
-.btn-whatsapp.disabled { background-color: #aaa; cursor: not-allowed; }
 
-/* --- NUEVOS ESTILOS PARA EL FORMULARIO --- */
-.customer-details { border-top: 2px solid var(--light-gray); padding-top: 15px; margin-top: 15px; }
+.cart-footer {
+    /* Evita que el pie de página se encoja */
+    flex-shrink: 0;
+    border-top: 2px solid var(--light-gray);
+    padding-top: 15px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    /* Tamaño aumentado para mejor visibilidad */
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.btn-whatsapp {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+    /* Botón más grande y visible */
+    padding: 16px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-whatsapp:hover { background-color: #1EBE57; transform: scale(1.02); }
+.btn-whatsapp.disabled { background-color: #aaa; cursor: not-allowed; transform: none; }
+
+/* --- FORMULARIO --- */
+.customer-details { padding-top: 15px; margin-top: 15px; border-top: 1px dashed #ccc; }
 .customer-details h4 { margin-bottom: 15px; font-weight: 600; }
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 5px; }
-.form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-}
-.form-group input:focus, .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(0, 87, 75, 0.2);
-}
+.form-group input[type="text"], .form-group input[type="tel"], .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 1rem; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(0, 87, 75, 0.2); }
 .delivery-options { display: flex; gap: 10px; }
 .delivery-options input[type="radio"] { display: none; }
-.delivery-options label {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+.delivery-options label { flex: 1; text-align: center; padding: 10px; border: 2px solid #ccc; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
 .delivery-options label i { margin-right: 5px; }
-.delivery-options input[type="radio"]:checked + label {
-    background-color: var(--secondary-color);
-    border-color: var(--primary-color);
-    font-weight: 600;
-}
-.form-errors {
-    background-color: rgba(231, 76, 60, 0.1);
-    color: var(--danger-color);
-    border: 1px solid var(--danger-color);
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
+.delivery-options input[type="radio"]:checked + label { background-color: var(--secondary-color); border-color: var(--primary-color); font-weight: 600; }
+.form-errors { background-color: rgba(231, 76, 60, 0.1); color: var(--danger-color); border: 1px solid var(--danger-color); border-radius: 8px; padding: 10px; font-size: 0.9rem; margin-top: 10px; }
 .form-errors ul { list-style-position: inside; padding-left: 5px; }
 
-/* --- Estilos para Móvil --- */
+/* --- VISTA MÓVIL CORREGIDA --- */
 @media (max-width: 991px) {
-    .cart-summary { position: fixed; bottom: 0; left: 0; right: 0; top: auto; z-index: 2000; border-radius: 20px 20px 0 0; padding: 15px; transform: translateY(100%); transition: transform 0.4s ease-in-out; max-height: 80vh; }
+    .cart-summary { 
+        position: fixed; bottom: 0; left: 0; right: 0; top: auto; z-index: 2000; border-radius: 20px 20px 0 0; padding: 15px; transform: translateY(100%); transition: transform 0.4s ease-in-out; 
+        /* Aumentamos la altura máxima para mejor visibilidad */
+        max-height: 85vh; 
+    }
     .cart-summary.active { transform: translateY(0); }
     .cart-header { cursor: pointer; }
     .mobile-cart-button { display: flex; align-items: center; justify-content: center; position: fixed; bottom: 20px; right: 20px; z-index: 1999; background-color: var(--primary-color); color: var(--white); border: none; width: 60px; height: 60px; border-radius: 50%; box-shadow: var(--shadow); font-size: 1.5rem; cursor: pointer; }
