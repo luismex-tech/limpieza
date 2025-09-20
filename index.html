@@ -36,37 +36,37 @@
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
-            <div id="cart-items" class="cart-items-container">
-                <p class="cart-empty-message">Tu carrito está vacío.</p>
-            </div>
             
-            <div class="customer-details">
-                <h4>Completa tu Pedido</h4>
-                <div class="form-group">
-                    <label for="customer-name">Nombre Completo:</label>
-                    <input type="text" id="customer-name" placeholder="Ej: Juan Pérez">
+            <div class="cart-body">
+                <div id="cart-items" class="cart-items-container">
+                    <p class="cart-empty-message">Tu carrito está vacío.</p>
                 </div>
-                <div class="form-group">
-                    <label for="customer-phone">Teléfono (10 dígitos):</label>
-                    <input type="tel" id="customer-phone" placeholder="Ej: 4771234567" maxlength="10">
-                </div>
-
-                <div class="form-group">
-                    <label>Método de Entrega:</label>
-                    <div class="delivery-options">
-                        <input type="radio" name="delivery-option" id="pickup" value="Recoger en Tienda">
-                        <label for="pickup"><i class="fa-solid fa-shop"></i> Recoger en Tienda</label>
-                        
-                        <input type="radio" name="delivery-option" id="delivery" value="Envío a Domicilio">
-                        <label for="delivery"><i class="fa-solid fa-motorcycle"></i> Envío a Domicilio</label>
+                <div class="customer-details">
+                    <h4>Completa tu Pedido</h4>
+                    <div class="form-group">
+                        <label for="customer-name">Nombre Completo:</label>
+                        <input type="text" id="customer-name" placeholder="Ej: Juan Pérez">
                     </div>
+                    <div class="form-group">
+                        <label for="customer-phone">Teléfono (10 dígitos):</label>
+                        <input type="tel" id="customer-phone" placeholder="Ej: 4771234567" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Método de Entrega:</label>
+                        <div class="delivery-options">
+                            <input type="radio" name="delivery-option" id="pickup" value="Recoger en Tienda">
+                            <label for="pickup"><i class="fa-solid fa-shop"></i> Recoger en Tienda</label>
+                            
+                            <input type="radio" name="delivery-option" id="delivery" value="Envío a Domicilio">
+                            <label for="delivery"><i class="fa-solid fa-motorcycle"></i> Envío a Domicilio</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-comments">Comentarios Adicionales:</label>
+                        <textarea id="customer-comments" rows="3" placeholder="Para envíos, indica aquí tu dirección completa."></textarea>
+                    </div>
+                    <div id="form-errors" class="form-errors"></div>
                 </div>
-
-                <div class="form-group">
-                    <label for="customer-comments">Comentarios Adicionales:</label>
-                    <textarea id="customer-comments" rows="3" placeholder="Para envíos, indica aquí tu dirección completa."></textarea>
-                </div>
-                <div id="form-errors" class="form-errors"></div>
             </div>
             
             <div class="cart-footer">
@@ -75,7 +75,7 @@
                     <strong id="cart-subtotal">$0.00</strong>
                 </div>
                 <button id="send-order-btn" class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i> Enviar Pedido por WhatsApp
+                    <i class="fa-brands fa-whatsapp"></i> Enviar Pedido
                 </button>
             </div>
         </aside>
@@ -86,7 +86,6 @@
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="mobile-cart-count">0</span>
     </button>
-
 
     <footer class="footer">
         <div class="container footer-content">
